@@ -42,11 +42,11 @@ export default function BuildPage() {
 
         {/* Form Section */}
         <div className="space-y-2">
-          <Input placeholder="Test Name" className="w-full text-black" />
-          <Input placeholder="Description" className="w-full text-black" />
-          <Input placeholder="URL" className="w-full text-black" />
+          <Input placeholder="Test Name" className="w-full text-white" />
+          <Input placeholder="Description" className="w-full text-white" />
+          <Input placeholder="URL" className="w-full text-white" />
 
-          <div className="flex justify-between items-center text-black">
+          <div className="flex justify-between items-center text-white">
             <MultiSelect
               options={browserOptions}
               className="w-full"
@@ -55,15 +55,14 @@ export default function BuildPage() {
           </div>
         </div>
 
-        <div className="text-black">
-          <label className="block text-sm font-medium text-black">Actions</label>
+        <div >
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead>Action</TableHead>
-                <TableHead>Element Type</TableHead>
-                <TableHead>Element Value</TableHead>
-                <TableHead>Action</TableHead>
+                <TableHead className="text-accentDark">Action</TableHead>
+                <TableHead className="text-accentDark">Element Type</TableHead>
+                <TableHead className="text-accentDark">Element Value</TableHead>
+                <TableHead className="text-accentDark">Action</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -72,13 +71,13 @@ export default function BuildPage() {
                   
                   {/* Action dropdown */}
                   <Select >
-                    <SelectTrigger className="w-full">
+                    <SelectTrigger className="w-full bg-input">
                       <SelectValue placeholder="Actions" />
                     </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="click">Click</SelectItem>
-                      <SelectItem value="assertion">Assertion</SelectItem>
-                      <SelectItem value="moveToElement">Move to element</SelectItem>
+                    <SelectContent className="bg-input">
+                      <SelectItem className="hover:bg-accentDark hover:text-black" value="click">Click</SelectItem>
+                      <SelectItem className="hover:bg-accentDark hover:text-black" value="assertion">Assertion</SelectItem>
+                      <SelectItem className="hover:bg-accentDark hover:text-black" value="moveToElement">Move to element</SelectItem>
                     </SelectContent>
                   </Select>
                 </TableCell>
@@ -86,20 +85,20 @@ export default function BuildPage() {
                   
                   {/* Selector dropdown */}
                   <Select >
-                    <SelectTrigger className="w-full">
+                    <SelectTrigger className="w-full bg-input">
                       <SelectValue placeholder="Selectors" />
                     </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="css">CSS</SelectItem>
-                      <SelectItem value="xpath">XPath</SelectItem>
+                    <SelectContent className="bg-input">
+                      <SelectItem className="hover:bg-accentDark hover:text-black" value="css">CSS</SelectItem>
+                      <SelectItem className="hover:bg-accentDark hover:text-black" value="xpath">XPath</SelectItem>
                     </SelectContent>
                   </Select>
                 </TableCell>
                 <TableCell>
-                  <Input placeholder="Element Value" />
+                  <Input placeholder="Element Value" className="text-white" />
                 </TableCell>
                 <TableCell>
-                  <Button onClick={addRow} variant="outline" className="text-white">Add Next Action</Button>
+                  <Button onClick={addRow} variant="outline" className="text-accentDark bg-primary hover:bg-accentDark border-accentDark hover:transistion-all duration-500">Add Next Action</Button>
                 </TableCell>
               </TableRow>
             </TableBody>
@@ -108,15 +107,9 @@ export default function BuildPage() {
 
         {/* Buttons Section */}
         <div className="flex mt-4 space-x-4 pt-4">
-          <Button variant="secondary">View Code</Button>
-          <Button variant="destructive">Run</Button>
-          <Button variant="secondary">Add Testcase</Button>
-        </div>
-
-        {/* Console Window */}
-        <div className="mt-4 p-4 bg-gray-500 rounded-md">
-          <h2 className="text-lg font-semibold">Console</h2>
-          <div className="text-sm text-gray-700">Test output will be displayed here...</div>
+          <Button variant="outline" className="text-cyan-500 bg-primary hover:bg-cyan-500 hover:text-black border-cyan-500 hover:transistion-all duration-500">View Code</Button>
+          <Button variant="outline" className="text-green-500 bg-primary hover:bg-green-500 hover:text-black border-green-500 hover:transistion-all duration-500">Run</Button>
+          <Button variant="outline" className="text-purple-500 bg-primary hover:bg-purple-500 hover:text-black border-purple-500 hover:transistion-all duration-200">Add Testcase</Button>
         </div>
       </div>
     </>

@@ -24,8 +24,9 @@ module.exports = {
     },
     extend: {
       colors:{
-        primary: "#1e1e1e",
+        primary: "#000000",
         secondary: "#f2f2f2",
+        input: "#333333",
         accentDark: {
           DEFAULT: "#FFD700",
           hover: "#FFD700",
