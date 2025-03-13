@@ -1,10 +1,14 @@
-"use client"
+"use client";
 import PageHeader from "@/components/PageHeader";
 import { Hammer } from "lucide-react";
-import { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import MultiSelect from "@/components/Multiselect";
+import { MdDeleteOutline, MdAddCircleOutline } from "react-icons/md";
+import { FaCode, FaPlay, FaSave } from "react-icons/fa";
+
+
 import {
   Table,
   TableBody,
@@ -12,15 +16,42 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '@/components/ui/table';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-
+} from "@/components/ui/table";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 export default function BuildPage() {
-  const [rows, setRows] = useState([]);
+  // Initial state with one default row
+  const [rows, setRows] = useState([
+    { id: 1, action: "", elementType: "", elementValue: "" },
+  ]);
 
+  // Function to add a new row
   const addRow = () => {
-    setRows((prev) => [...prev, { id: prev.length + 1, action: '', elementType: '', elementValue: '' }]);
+    setRows((prev) => [
+      ...prev,
+      { id: prev.length + 1, action: "", elementType: "", elementValue: "" },
+    ]);
+  };
+
+  // Function to update a specific field in a row
+  const updateRow = (index, field, value) => {
+    const updatedRows = [...rows];
+    updatedRows[index][field] = value;
+    setRows(updatedRows);
+  };
+
+  // Function to delete a specific row
+  const deleteRow = (index) => {
+    if (rows.length > 1) {
+      const updatedRows = rows.filter((_, i) => i !== index);
+      setRows(updatedRows);
+    }
   };
 
   const browserOptions = [
@@ -37,82 +68,148 @@ export default function BuildPage() {
       </PageHeader>
 
       <div className="p-6 space-y-4 bg-primary">
-        {/* Header */}
-        <h1 className="text-2xl font-semibold text-accentDark">Playwright Test Builder</h1>
+        <h1 className="text-2xl font-semibold text-accentDark">
+          Playwright Test Builder
+        </h1>
+
+        <nav className="bg-navbar text-navbar-text p-2">
+          <div className="flex justify-start space-x-4 py-2">
+            <Button
+              variant="ghost"
+              className="text-cyan-500 transition-all duration-500"
+              aria-label="View Code"
+            >
+              <FaCode />
+            </Button>
+            <Button
+              variant="ghost"
+              className="text-green-500 transition-all duration-500"
+              aria-label="Run Test"
+            >
+              <FaPlay />
+            </Button>
+            <Button
+              variant="ghost"
+              className="text-purple-500 transition-all duration-200"
+              aria-label="Save Test Case"
+            >
+              <FaSave />
+            </Button>
+          </div>
+        </nav>
 
         {/* Form Section */}
-        <div className="space-y-2">
-          <Input placeholder="Test Name" className="w-full text-white" />
-          <Input placeholder="Description" className="w-full text-white" />
-          <Input placeholder="URL" className="w-full text-white" />
-
-          <div className="flex justify-between items-center text-white">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <Input placeholder="Test Name" className="w-full text-white" />
+          </div>
+          <div>
+            <Input placeholder="Description" className="w-full text-white" />
+          </div>
+          <div>
+            <Input placeholder="URL" className="w-full text-white" />
+          </div>
+          <div>
             <MultiSelect
               options={browserOptions}
               className="w-full"
-              placeholder="Select Browser" 
+              placeholder="Select Browser"
             />
           </div>
         </div>
-
-        <div >
+        <div>
           <Table>
             <TableHeader>
               <TableRow>
+                <TableHead className="text-accentDark">+</TableHead>
                 <TableHead className="text-accentDark">Action</TableHead>
                 <TableHead className="text-accentDark">Element Type</TableHead>
                 <TableHead className="text-accentDark">Element Value</TableHead>
-                <TableHead className="text-accentDark">Action</TableHead>
+                <TableHead className="text-accentDark">-</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
-              <TableRow>
-                <TableCell>
-                  
-                  {/* Action dropdown */}
-                  <Select >
-                    <SelectTrigger className="w-full bg-input">
-                      <SelectValue placeholder="Actions" />
-                    </SelectTrigger>
-                    <SelectContent className="bg-input">
-                      <SelectItem className="hover:bg-accentDark hover:text-black" value="click">Click</SelectItem>
-                      <SelectItem className="hover:bg-accentDark hover:text-black" value="assertion">Assertion</SelectItem>
-                      <SelectItem className="hover:bg-accentDark hover:text-black" value="moveToElement">Move to element</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </TableCell>
-                <TableCell>
-                  
-                  {/* Selector dropdown */}
-                  <Select >
-                    <SelectTrigger className="w-full bg-input">
-                      <SelectValue placeholder="Selectors" />
-                    </SelectTrigger>
-                    <SelectContent className="bg-input">
-                      <SelectItem className="hover:bg-accentDark hover:text-black" value="css">CSS</SelectItem>
-                      <SelectItem className="hover:bg-accentDark hover:text-black" value="xpath">XPath</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </TableCell>
-                <TableCell>
-                  <Input placeholder="Element Value" className="text-white" />
-                </TableCell>
-                <TableCell>
-                  <Button onClick={addRow} variant="outline" className="text-accentDark bg-primary hover:bg-accentDark border-accentDark hover:transistion-all duration-500">Add Next Action</Button>
-                </TableCell>
-              </TableRow>
+              {rows.map((row, index) => (
+                <TableRow key={row.id}>
+                  {/* + Add Row Button */}
+                  <TableCell>
+                    <Button
+                      onClick={addRow}
+                      variant="ghost"
+                      className="text-green-500 transition-all duration-300"
+                    >
+                      <MdAddCircleOutline />
+                    </Button>
+                  </TableCell>
+
+                  <TableCell>
+                    {/* Action dropdown */}
+                    <Select
+                      value={row.action}
+                      onValueChange={(value) =>
+                        updateRow(index, "action", value)
+                      }
+                    >
+                      <SelectTrigger className="w-full bg-input">
+                        <SelectValue placeholder="Actions" />
+                      </SelectTrigger>
+                      <SelectContent className="bg-input">
+                        <SelectItem value="click">Click</SelectItem>
+                        <SelectItem value="assertion">Assertion</SelectItem>
+                        <SelectItem value="moveToElement">
+                          Move to element
+                        </SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </TableCell>
+
+                  <TableCell>
+                    {/* Selector dropdown */}
+                    <Select
+                      value={row.elementType}
+                      onValueChange={(value) =>
+                        updateRow(index, "elementType", value)
+                      }
+                    >
+                      <SelectTrigger className="w-full bg-input">
+                        <SelectValue placeholder="Selectors" />
+                      </SelectTrigger>
+                      <SelectContent className="bg-input">
+                        <SelectItem value="css">CSS</SelectItem>
+                        <SelectItem value="xpath">XPath</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </TableCell>
+
+                  <TableCell>
+                    <Input
+                      value={row.elementValue}
+                      onChange={(e) =>
+                        updateRow(index, "elementValue", e.target.value)
+                      }
+                      placeholder="Element Value"
+                      className="text-white"
+                    />
+                  </TableCell>
+
+                  {/* - Delete Row Button */}
+                  <TableCell>
+                    {index !== 0 && (
+                      <Button
+                        onClick={() => deleteRow(index)}
+                        variant="ghost"
+                        className="text-red-500 transition-all duration-300"
+                      >
+                        <MdDeleteOutline />
+                      </Button>
+                    )}
+                  </TableCell>
+                </TableRow>
+              ))}
             </TableBody>
           </Table>
         </div>
-
-        {/* Buttons Section */}
-        <div className="flex mt-4 space-x-4 pt-4">
-          <Button variant="outline" className="text-cyan-500 bg-primary hover:bg-cyan-500 hover:text-black border-cyan-500 hover:transistion-all duration-500">View Code</Button>
-          <Button variant="outline" className="text-green-500 bg-primary hover:bg-green-500 hover:text-black border-green-500 hover:transistion-all duration-500">Run</Button>
-          <Button variant="outline" className="text-purple-500 bg-primary hover:bg-purple-500 hover:text-black border-purple-500 hover:transistion-all duration-200">Add Testcase</Button>
-        </div>
       </div>
     </>
-
   );
 }
