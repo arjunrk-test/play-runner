@@ -8,7 +8,6 @@ import MultiSelect from "@/components/Multiselect";
 import { MdDeleteOutline, MdAddCircleOutline } from "react-icons/md";
 import { FaCode, FaPlay, FaSave } from "react-icons/fa";
 
-
 import {
   Table,
   TableBody,
@@ -99,17 +98,13 @@ export default function BuildPage() {
         </nav>
 
         {/* Form Section */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div>
+        <div className="space-y-2">
+          <div className="grid grid-cols-2 gap-2">
             <Input placeholder="Test Name" className="w-full text-white" />
-          </div>
-          <div>
             <Input placeholder="Description" className="w-full text-white" />
           </div>
-          <div>
+          <div className="grid grid-cols-2 gap-2">
             <Input placeholder="URL" className="w-full text-white" />
-          </div>
-          <div>
             <MultiSelect
               options={browserOptions}
               className="w-full"
@@ -117,21 +112,21 @@ export default function BuildPage() {
             />
           </div>
         </div>
-        <div>
-          <Table>
+
+        <div className="overflow-auto max-h-64">
+          <Table className="w-full">
             <TableHeader>
               <TableRow>
-                <TableHead className="text-accentDark">+</TableHead>
-                <TableHead className="text-accentDark">Action</TableHead>
-                <TableHead className="text-accentDark">Element Type</TableHead>
-                <TableHead className="text-accentDark">Element Value</TableHead>
-                <TableHead className="text-accentDark">-</TableHead>
+                <TableHead className="text-accentDark sticky top-0 bg-primary">Add Row</TableHead>
+                <TableHead className="text-accentDark sticky top-0 bg-primary"> Action</TableHead>
+                <TableHead className="text-accentDark sticky top-0 bg-primary">Element Type</TableHead>
+                <TableHead className="text-accentDark sticky top-0 bg-primary">Element Value</TableHead>
+                <TableHead className="text-accentDark sticky top-0 bg-primary">Delete Row</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {rows.map((row, index) => (
                 <TableRow key={row.id}>
-                  {/* + Add Row Button */}
                   <TableCell>
                     <Button
                       onClick={addRow}
@@ -142,8 +137,8 @@ export default function BuildPage() {
                     </Button>
                   </TableCell>
 
+                  {/* Action Dropdown */}
                   <TableCell>
-                    {/* Action dropdown */}
                     <Select
                       value={row.action}
                       onValueChange={(value) =>
@@ -163,8 +158,8 @@ export default function BuildPage() {
                     </Select>
                   </TableCell>
 
+                  {/* Selector Dropdown */}
                   <TableCell>
-                    {/* Selector dropdown */}
                     <Select
                       value={row.elementType}
                       onValueChange={(value) =>
@@ -181,6 +176,7 @@ export default function BuildPage() {
                     </Select>
                   </TableCell>
 
+                  {/* Element Value Input */}
                   <TableCell>
                     <Input
                       value={row.elementValue}
@@ -192,7 +188,7 @@ export default function BuildPage() {
                     />
                   </TableCell>
 
-                  {/* - Delete Row Button */}
+                  {/* Delete Row Button */}
                   <TableCell>
                     {index !== 0 && (
                       <Button
@@ -213,3 +209,4 @@ export default function BuildPage() {
     </>
   );
 }
+
