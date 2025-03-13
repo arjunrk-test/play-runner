@@ -9,27 +9,11 @@ import { CiLight, CiDark } from "react-icons/ci";
 
 export default function PageHeader({ children }) {
   const [isOpen] = useAtom(sidebarOpen);
-  const [theme, setTheme] = useState("dark");
-
-  useEffect(() => {
-    const savedTheme = localStorage.getItem("theme");
-    if (savedTheme) {
-      setTheme(savedTheme);
-      document.documentElement.classList.toggle("light", savedTheme === "light");
-    }
-  }, []);
-  const handleThemeClick = () => {
-    const newTheme = theme === "dark" ? "light" : "dark";
-    setTheme(newTheme);
-    localStorage.setItem("theme", newTheme);
-    document.documentElement.classList.toggle("light", newTheme === "light");
-  };
 
   return (
     <div
       className={cn(
-        "flex items-center h-[60px] pr-6 border-b transition-colors duration-300",
-        isDarkMode ? "bg-primary text-white" : "bg-secondary text-black"
+        "flex items-center h-[60px] pr-6 border-b transition-colors duration-300 text-white bg-primary"
       )}
     >
       <ToggleSidebarButton />
@@ -42,8 +26,8 @@ export default function PageHeader({ children }) {
         {children}
       </div>
       <div className="flex justify-between items-center ml-2 mr-2">
-          <Button onClick={handleThemeClick} className="bg-none text-navbarText hover:bg-navbarHover hover:text-navbarText" variant="ghost">
-            {theme === "light" ? <CiLight /> : <CiDark />}
+          <Button className="bg-none text-navbarText hover:bg-navbarHover hover:text-navbarText" variant="ghost">
+            <CiLight />
           </Button>
       </div>
     </div>

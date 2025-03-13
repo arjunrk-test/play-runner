@@ -36,9 +36,9 @@ export default function BuildPage() {
         <h3 className="text-lg font-semibold">Build</h3>
       </PageHeader>
 
-      <div className="p-6 space-y-4 bg-secondary">
+      <div className="p-6 space-y-4 bg-primary">
         {/* Header */}
-        <h1 className="text-2xl font-semibold text-[#1e3a8a]">Playwright Test Builder</h1>
+        <h1 className="text-2xl font-semibold text-accentDark">Playwright Test Builder</h1>
 
         {/* Form Section */}
         <div className="space-y-2">

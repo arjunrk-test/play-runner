@@ -16,7 +16,7 @@ export default function Sidebar() {
   return (
     <aside
       className={cn(
-        "fixed left-0 top-0 border-r z-20 transition-[width] ease-in-out overflow-hidden text-black",
+        "fixed left-0 top-0 border-r z-20 transition-[width] ease-in-out overflow-hidden",
         "flex flex-col max-h-screen h-full",
         isOpen ? "w-[18rem]" : "w-[3.5rem]",
       )}
@@ -24,7 +24,7 @@ export default function Sidebar() {
       {/* Sidebar header */}
       <div
         className={cn(
-          "flex items-center h-[60px] border-b bg-[#f2f2f2] text-black",
+          "flex items-center h-[60px] border-b bg-primary text-white",
           isOpen ? "px-6" : "justify-center"
         )}
       >
@@ -50,7 +50,7 @@ export default function Sidebar() {
         ) : null}
       </div>
 
-      <nav className="flex flex-col flex-1 text-sm font-medium bg-[#f2f2f2] text-black">
+      <nav className="flex flex-col flex-1 text-sm font-medium bg-primary text-white">
         {/* Main menu links */}
         <div
           className={cn(
@@ -97,7 +97,7 @@ export default function Sidebar() {
         {/* Bottom section of the sidebar */}
         <div
           className={cn(
-            "mt-auto flex flex-col border-b border-t bg-[#f2f2f2]",
+            "mt-auto flex flex-col border-b border-t bg-primary",
             isOpen ? "p-4" : "items-center gap-y-4 py-4 animate-sidebar-closed"
           )}
         >

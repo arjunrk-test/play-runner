@@ -9,8 +9,8 @@ export function NavbarLink({ isSidebarOpen, icon, label, isSelected, href }) {
       <Link
         href={href}
         className={cn(
-          "flex items-center gap-3 rounded-lg p-3 transition-colors hover:text-primary",
-          isSelected ? "bg-muted text-primary" : "text-muted-foreground"
+          "flex items-center gap-3 rounded-lg p-3 transition-colors hover:text-accentDark",
+          isSelected ? "bg-muted text-accentDark" : "text-muted-foreground"
         )}
       >
         {icon}
@@ -25,7 +25,7 @@ export function NavbarLink({ isSidebarOpen, icon, label, isSelected, href }) {
         <Link
           href={href}
           className={cn(
-            "flex h-9 w-9 items-center justify-center rounded-lg transition-colors hover:text-primary ",
+            "flex h-9 w-9 items-center justify-center rounded-lg transition-colors hover:text-primary hover:bg-accentDark",
             isSelected ? "bg-muted text-primary" : "text-muted-foreground"
           )}
         >
