@@ -3,7 +3,7 @@ import PageHeader from "@/components/PageHeader";
 import { Hammer } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { FaCode, FaPlay, FaSave } from "react-icons/fa";
+import { FaPlay, FaSave } from "react-icons/fa";
 import { MultiSelect } from "@/components/MultiSelect";
 import { FaSafari, FaChrome, FaEdge } from "react-icons/fa";
 import ActionEditorLayout from "@/components/ActionLayout/ActionEditorLayout";
@@ -35,13 +35,6 @@ export default function BuildPage() {
 
         <nav className="bg-navbar text-navbar-text p-2">
           <div className="flex justify-start space-x-4 py-2">
-            <Button
-              variant="ghost"
-              className="text-cyan-500 transition-all duration-500"
-              aria-label="View Code"
-            >
-              <FaCode />
-            </Button>
             <Button
               variant="ghost"
               className="text-green-500 transition-all duration-500"
