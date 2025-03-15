@@ -91,9 +91,9 @@ export default function BuildPage() {
         {/* Form Section */}
         <div className="space-y-2">
           <div className="grid grid-cols-4 gap-2">
-            <Input placeholder="Test Name" className="w-full h-5 text-white border-accentDark" />
-            <Input placeholder="Description" className="w-full h-5 text-white border-accentDark" />
-            <Input placeholder="URL" className="w-full h-5 text-white border-accentDark" />
+            <Input placeholder="Test Name" className="w-full h-5 text- border-red-700" />
+            <Input placeholder="Description" className="w-full h-5 text-white border-green-700" />
+            <Input placeholder="URL" className="w-full h-5 text-white border-blue-700" />
             <MultiSelect 
               options={browserOptions} 
               placeholder="Select browser"

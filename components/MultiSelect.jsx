@@ -185,7 +185,7 @@ export const MultiSelect = React.forwardRef(
               </div>
             ) : (
               <div className="flex items-center justify-between w-full mx-auto">
-                <span className="text-sm text-muted-foreground mx-3">
+                <span className="text-md text-muted-foreground mx-3">
                   {placeholder}
                 </span>
                 <ChevronDown className="h-4 cursor-pointer text-muted-foreground mx-2" />
@@ -194,19 +194,20 @@ export const MultiSelect = React.forwardRef(
           </Button>
         </PopoverTrigger>
         <PopoverContent
-          className="w-auto p-0"
+          className="w-auto p-0 bg-input"
           align="start"
           onEscapeKeyDown={() => setIsPopoverOpen(false)}
         >
-          <Command>
+          <Command className="bg-input text-white">
             <CommandInput
               placeholder="Search..."
               onKeyDown={handleInputKeyDown}
+              
             />
             <CommandList>
-              <CommandEmpty>No results found.</CommandEmpty>
+              <CommandEmpty className="bg-input text-white pl-2">No results found.</CommandEmpty>
               <CommandGroup>
-                <CommandItem key="all" onSelect={toggleAll}>
+                <CommandItem  key="all" onSelect={toggleAll} >
                   (Select All)
                 </CommandItem>
                 {options.map((option) => {
