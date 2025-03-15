@@ -20,7 +20,7 @@ export default function ToggleSidebarButton() {
         className="h-6 w-6 text-foreground/50 hover:text-foreground transition-colors"
         onClick={() => setOpen((prev) => !prev)}
       >
-        <ArrowRight className="h-4 w-4" />
+        <ArrowRight className="h-4 w-4 text-red-500" />
         <span className="sr-only">Toggle Navbar</span>
       </Button>
     </div>
